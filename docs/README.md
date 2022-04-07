@@ -20,3 +20,14 @@ example output:
 
 4) Can I list all bucket policies?  I sure can.
 <pre>{ for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); do aws s3api get-bucket-policy --bucket $bucket 2>/dev/null; done; } > bucket-policies.txt</pre>
+
+5) List all S3 buckets in the default region that have 'Public' permissions listed anywhere in the ACL (must have GetBucketAcl or access will be denied.)
+<pre>BUCKETS=`aws s3api list-buckets --query 'Buckets[*].Name' --output text | tr " " "\n"`
+for BUCKET in $BUCKETS
+do
+  public=`aws s3api get-bucket-acl --bucket $BUCKET | grep -e 'URI.*http\:\/\/acs\.amazonaws\.com\/groups\/global\/AllUsers\"'`
+  if [ ! -z "$public" ]
+  then
+    echo "$BUCKET"
+  fi
+done</pre>
