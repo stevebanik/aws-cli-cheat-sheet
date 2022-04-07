@@ -17,3 +17,6 @@ example output:
 3) Which of my ec2 security groups are being used?
 <pre>{ aws ec2 describe-network-interfaces | jq '[.NetworkInterfaces[].Groups[]|.]|map({ (.GroupId|tostring): true }) 
 | add'; aws ec2 describe-security-groups | jq '[.SecurityGroups[].GroupId]|map({ (.|tostring): false })|add'; } | jq -s '[.[1], .[0]]|add|to_entries|[group_by(.value)[]|{ (.[0].value|if . then "in-use" else "unused" end): [.[].key] }]|add'</pre>
+
+4) Can I list all bucket policies?  I sure can.
+<pre>{ for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); do aws s3api get-bucket-policy --bucket $bucket 2>/dev/null; done; } > bucket-policies.txt</pre>
