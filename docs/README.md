@@ -22,6 +22,7 @@ Can I list all bucket policies?  I sure can.
 <pre>{ for bucket in $(aws s3api list-buckets --query "Buckets[].Name" --output text); do aws s3api get-bucket-policy --bucket $bucket 2>/dev/null; done; } > bucket-policies.txt</pre>
 
 List all S3 buckets in the default region that have 'Public' permissions listed anywhere in the ACL (must have GetBucketAcl or access will be denied.)
+See [S3Scanner](https://github.com/sa7mon/S3Scanner) for an enhanced  implementation of the same.
 <pre>BUCKETS=`aws s3api list-buckets --query 'Buckets[*].Name' --output text | tr " " "\n"`
 for BUCKET in $BUCKETS
 do
