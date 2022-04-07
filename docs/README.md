@@ -3,4 +3,11 @@ list all instances in table format
 </code></pre>
 example output:
 
-![Getting Started](./images/table.png)
+![](./images/table.png)
+
+what's my user id, account and ARN?
+<pre><code\small>{ aws sts get-caller-identity & aws iam list-account-aliases; } | jq -s ".|add"
+</code></pre>
+example output:
+
+![](./images/get-caller-ident.png)
