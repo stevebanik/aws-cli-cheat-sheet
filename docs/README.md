@@ -1,4 +1,4 @@
-Here are a few useful [AWS CLI](https://aws.amazon.com/cli/) commands taken from [this article](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1).
+Here are a few useful [AWS CLI](https://aws.amazon.com/cli/) commands mostly inspired by [this article](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1).
 
 1) List all instances in table format
 <pre>aws ec2 describe-instances --query 'Reservations[].Instances[].[Placement.AvailabilityZone, State.Name, InstanceId,InstanceType,Platform,Tags.Value,State.Code,Tags.Values]' --output table
