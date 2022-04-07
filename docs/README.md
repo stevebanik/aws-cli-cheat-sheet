@@ -31,3 +31,11 @@ do
     echo "$BUCKET"
   fi
 done</pre>
+
+6) List total GB of volumes, by status.
+
+<pre>aws ec2 describe-volumes | jq -r '.Volumes | [ group_by(.State)[] | { (.[0].State): ([.[].Size] | add) } ] | add'</pre>
+example output:
+
+![](./images/volume-status-gb.png)
+
