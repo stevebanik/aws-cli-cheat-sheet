@@ -2,4 +2,5 @@ list all instances in table format
 <pre><code\small>aws ec2 describe-instances --query 'Reservations[].Instances[].[Placement.AvailabilityZone, State.Name, InstanceId,InstanceType,Platform,Tags.Value,State.Code,Tags.Values]' --output table
 </code></pre>
 example output:
+
 ![Getting Started](./images/table.png)
